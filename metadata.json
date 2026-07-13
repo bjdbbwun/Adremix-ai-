@@ -1,0 +1,6 @@
+{
+  "name": "AdRemix AI",
+  "description": "Transform product details into high-converting video and image scripts, hooks, and captions for TikTok, Instagram, Facebook, and YouTube using Gemini AI.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

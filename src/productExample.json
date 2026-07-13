@@ -1,0 +1,94 @@
+{
+  "schema_comment": "هذا النموذج يمثل مثالاً متكاملاً لمنتج 'موزع عطور اللهب البركاني' مُهيأ ومُعد خصيصاً لمنصة Adremix AI لتوليد الإعلانات والوصف وريلز ترويجية عالية التحويل.",
+  
+  "id": "prod_volcano_diffuser_001",
+  "name": "موزع عطور اللهب البركاني المتطور (Volcanic Flame Diffuser)",
+  "brand": "AuraGlow Co.",
+  
+  "description": "موزع عطور ومرطب هواء فريد من نوعه يدمج بين تقنية الأمواج فوق الصوتية ومؤثرات الإضاءة الذكية ليعطي شكلاً يحاكي لهب البركان الثائر أو حممه الهادئة. يساعد على الاسترخاء الكامل، تعطير المنزل بالروائح العطرية المفضلة لديك، وتحسين جودة النوم في غرف المعيشة أو المكاتب.",
+  
+  "niche": "الأجهزة المنزلية الذكية وديكورات الاسترخاء (Smart Home Decor & Wellness)",
+  
+  "sourcePlatform": {
+    "platformName": "AliExpress / Shopify Store",
+    "productUrl": "https://www.aliexpress.com/item/1005005882193.html",
+    "supplierId": "sup_shenzhen_elec_889"
+  },
+  
+  "financials": {
+    "costOfGoods": 12.50,
+    "sellingPrice": 39.99,
+    "compareAtPrice": 69.99,
+    "currency": "USD"
+  },
+  
+  "keyUSPs": [
+    "مؤثر لهب واقعي بالكامل وآمن للمس والحيوانات الأليفة بفضل تقنية الضباب البارد والـ LEDs",
+    "وضعان ذكيان للتشغيل: وضع الانفجار البركاني النفاث (Volcanic Eruption Mode) ووضع اللهب الهادئ المستمر",
+    "خاصية الإيقاف التلقائي الذكي عند نفاد الماء لحماية الجهاز وحفظ الطاقة",
+    "تشغيل صامت فائق الهدوء (أقل من 30 ديسيبل) مناسب لغرف النوم والمذاكرة"
+  ],
+  
+  "painPointsSolved": [
+    "الروائح الكريهة أو المكتومة في المنازل وغرف المكاتب وتغيير الجو الكئيب",
+    "جفاف الهواء المؤدي لمشاكل التنفس، الحلق، وتلف البشرة أثناء النوم",
+    "التوتر والضغط النفسي وصعوبة الدخول في نوم عميق وصحي",
+    "الحاجة لقطعة ديكور فاخرة تثير انتباه الزوار وبسعر اقتصادي"
+  ],
+  
+  "targetAudience": {
+    "demographics": {
+      "ageGroups": ["20-35 (جيل Z والألفية)", "36-50 (أصحاب المنازل الجدد)"],
+      "gender": "all",
+      "locations": ["المملكة العربية السعودية", "الإمارات العربية المتحدة", "الولايات المتحدة الامريكية"]
+    },
+    "psychographics": {
+      "interests": [
+        "عشاق الديكورات المنزلية الحديثة والجمال البصري (Aesthetic & Cozy Home Vibes)",
+        "اليوغا، الاسترخاء، العلاج بالروائح العطرية (Aromatherapy & Self-Care)",
+        "رواد الأعمال والطلاب الباحثين عن بيئة عمل مريحة وخالية من التوتر",
+        "متابعي تريندات تيك توك الشهيرة للتسوق (TikTok Made Me Buy It)"
+      ],
+      "desires": [
+        "تحويل الغرفة إلى ملاذ دافئ وهادئ ومريح للأعصاب بميزانية بسيطة",
+        "امتلاك منتج 'فوتوجينيك' يبدو رائعاً في خلفية تصوير الفيديوهات ومقاطع الريلز",
+        "الحصول على هدية راقية وفريدة لإبهار الأصدقاء أو العائلة"
+      ]
+    }
+  },
+  
+  "creativeGuidelines": {
+    "toneOfVoice": "حماسية وتفاعلية في البداية لجذب الانتباه (Hook)، ثم دافئة وهادئة ومقنعة تشرح الفوائد العاطفية والنفسية للمنتج",
+    "visualAesthetic": "نمط UGC واقعي يظهر تفاعل حقيقي للمستخدم، تصوير في إضاءة خافتة لإبراز قوة اللهب والمؤثر البصري الباهر مع مؤثرات صوتية مريحة (ASMR)",
+    "unallowedWords": [
+      "رخيص",
+      "جهاز طبي",
+      "علاج نهائي للأمراض"
+    ],
+    "rawMediaAssets": [
+      {
+        "type": "video_ugc",
+        "url": "https://assets.adremix.ai/raw_ugc_volcano_unboxing.mp4"
+      },
+      {
+        "type": "lifestyle",
+        "url": "https://assets.adremix.ai/lifestyle_bedroom_flame_glow.jpg"
+      }
+    ]
+  },
+  
+  "reelsAndShortsConfig": {
+    "targetDurationSeconds": 15,
+    "includeCallToAction": true,
+    "musicVibe": "موسيقى لو-فاي هادئة ومريحة للأعصاب (Chill Lo-Fi / Atmospheric Ambient Beats)"
+  },
+  
+  "extensibility": {
+    "metafields": {
+      "waterCapacity": "360ml",
+      "sprayVolume": "20-30ml/h",
+      "recommendedOilType": "Essential water-soluble oils",
+      "tiktokTrendingTag": "#VolcanoDiffuser"
+    }
+  }
+}

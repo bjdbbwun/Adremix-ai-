@@ -1,0 +1,27 @@
+{
+  "entities": {
+    "campaign": {
+      "title": "Campaign",
+      "description": "Ad Remixer Campaign assets and input",
+      "type": "object",
+      "properties": {
+        "productName": { "type": "string", "maxLength": 100 },
+        "productDescription": { "type": "string", "maxLength": 2000 },
+        "targetAudience": { "type": "string", "maxLength": 200 },
+        "campaignGoal": { "type": "string", "maxLength": 200 },
+        "platforms": { "type": "array", "items": { "type": "string" } },
+        "toneStyle": { "type": "string", "maxLength": 100 },
+        "output": { "type": "object" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "ownerId": { "type": "string", "pattern": "^[a-zA-Z0-9_\\\\-]+$" }
+      },
+      "required": ["productName", "productDescription", "createdAt", "ownerId"]
+    }
+  },
+  "firestore": {
+    "/campaigns/{campaignId}": {
+      "schema": "campaign",
+      "description": "User created ad campaign"
+    }
+  }
+}

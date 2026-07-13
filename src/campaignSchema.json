@@ -1,0 +1,155 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AdremixCampaign",
+  "description": "Unified Ad Campaign Schema for Adremix AI representing generated ads, reels scripts, and product descriptions connected to an e-commerce product.",
+  "type": "object",
+  "required": [
+    "id",
+    "productId",
+    "campaignName",
+    "status",
+    "platforms",
+    "contentType",
+    "toneOfVoice",
+    "targetAudience",
+    "generationOutput",
+    "ownerId",
+    "createdAt"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "المعرف الفريد للحملة الإعلانية (يمثل ID الوثيقة في Firestore) / Unique Firestore Document ID"
+    },
+    "productId": {
+      "type": "string",
+      "description": "رابط معرف المنتج المرتبطة به هذه الحملة في قاعدة البيانات / Foreign key referencing the associated Product document ID"
+    },
+    "campaignName": {
+      "type": "string",
+      "maxLength": 150,
+      "description": "الاسم التعريفي للحملة الإعلانية لتسهيل تمييزها / Descriptive name of the ad campaign"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "generating", "active", "paused", "completed"],
+      "default": "draft",
+      "description": "حالة الحملة الإعلانية الحالية في المنصة / Current operational status of the campaign"
+    },
+    "platforms": {
+      "type": "array",
+      "description": "قائمة المنصات الإعلانية المستهدفة للحملة / Target advertising networks and social media platforms",
+      "items": {
+        "type": "string",
+        "enum": ["TikTok", "Meta (Facebook/Instagram)", "Snapchat", "YouTube Shorts", "Google Ads"]
+      },
+      "minItems": 1
+    },
+    "contentType": {
+      "type": "string",
+      "enum": ["reels_ugc_script", "image_carousel_ad", "product_description_seo", "full_funnel_package"],
+      "description": "نوع المحتوى المطلوب توليده للحملة / The structural content type generated in this campaign"
+    },
+    "toneOfVoice": {
+      "type": "string",
+      "description": "النبرة والأسلوب المستخدم في صياغة نصوص الإعلانات / The tone of voice guiding the copy generator"
+    },
+    "targetAudience": {
+      "type": "object",
+      "description": "المواصفات المستهدفة المخصصة للحملة (يمكن توريثها من المنتج أو تخصيصها هنا) / Audience targeting specifications",
+      "properties": {
+        "demographicsOverride": {
+          "type": "object",
+          "properties": {
+            "ageGroups": { "type": "array", "items": { "type": "string" }, "description": "الفئات العمرية المستهدفة / Target age ranges" },
+            "gender": { "type": "string", "enum": ["all", "male", "female"] },
+            "locations": { "type": "array", "items": { "type": "string" }, "description": "الدول والمناطق المستهدفة / Targeted geographic territories" }
+          }
+        },
+        "campaignGoal": {
+          "type": "string",
+          "maxLength": 300,
+          "description": "الهدف الرئيسي للحملة الإعلانية (مثال: زيادة المبيعات، بناء الوعي بالعلامة) / Primary conversion objective"
+        }
+      },
+      "required": ["campaignGoal"]
+    },
+    "generationOutput": {
+      "type": "object",
+      "description": "النواتج الإبداعية التي تم توليدها بواسطة الذكاء الاصطناعي للحملة / The actual AI-generated copy and script payloads",
+      "properties": {
+        "optimizedDescription": {
+          "type": "object",
+          "description": "الوصف التسويقي للمنتج المحسن لمحركات البحث وصفحات الهبوط / High-converting SEO-optimized landing page description",
+          "properties": {
+            "headline": { "type": "string", "description": "العنوان الرئيسي المثير للانتباه / Captivating main hook headline" },
+            "subheadline": { "type": "string", "description": "العنوان الفرعي المساند / Supportive sub-headline" },
+            "featuresBulletPoints": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "نقاط توضح المزايا بأسلوب الفوائد العاطفية / Bulleted lists connecting features to direct user benefits"
+            },
+            "storytellingBody": { "type": "string", "description": "سياق قصصي مقنع لزيادة الرغبة بالشراء / Persuasive narrative body copy" }
+          }
+        },
+        "adCopies": {
+          "type": "array",
+          "description": "نصوص إعلانية قصيرة ومختلفة للتجربة (A/B Testing) / Text copies for social feed advertisements",
+          "items": {
+            "type": "object",
+            "properties": {
+              "hookId": { "type": "string" },
+              "hookText": { "type": "string", "description": "الخطاف الجاذب للانتباه في أول 3 ثواني / Attention-grabbing 3-second hook" },
+              "bodyText": { "type": "string", "description": "النص الإعلاني الأساسي / Main creative body copy" },
+              "callToAction": { "type": "string", "description": "عبارة تحفيز الشراء الفوري / Direct call to action (e.g. Shop Now)" }
+            }
+          }
+        },
+        "reelsScripts": {
+          "type": "array",
+          "description": "سيناريوهات فيديوهات ريلز أو تيك توك مجهزة بالكامل / Ready-to-shoot scripts for vertical video platforms",
+          "items": {
+            "type": "object",
+            "properties": {
+              "scriptTitle": { "type": "string" },
+              "targetDuration": { "type": "integer", "description": "المدة التقريبية بالثواني / Estimated script duration in seconds" },
+              "scenes": {
+                "type": "array",
+                "description": "مشاهد السيناريو المفصلة ثانية بثانية / Sequential video scenes detailing visuals and audio",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "sceneNumber": { "type": "integer" },
+                    "visualDescription": { "type": "string", "description": "الوصف البصري واللقطة المطلوبة / Frame visual directions and camera setup" },
+                    "audioOrVoiceover": { "type": "string", "description": "النص المنطوق أو المؤثرات الصوتية / Script voiceover and audio cues" },
+                    "onScreenText": { "type": "string", "description": "الكتابة التوضيحية على الفيديو / Text overlay to display on screen" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "ownerId": {
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9_\\-]+$",
+      "description": "معرف المستخدم مالك الحملة (لتطبيق شروط الأمان في Firestore) / User ID of the campaign owner"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "تاريخ ووقت إنشاء الحملة / Timestamp indicating when the campaign was created"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "تاريخ ووقت آخر تحديث للحملة / Timestamp indicating when the campaign was last modified"
+    },
+    "extensibility": {
+      "type": "object",
+      "description": "حاوية بيانات مخصصة للتوسيع المستقبلي دون التأثير على الهيكل الرئيسي / Flexible metadata container for custom integration parameters",
+      "additionalProperties": true
+    }
+  }
+}

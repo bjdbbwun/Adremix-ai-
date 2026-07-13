@@ -1,0 +1,148 @@
+{
+  "templateName": "Adremix AI Reels & Vertical Video Script Generator",
+  "version": "1.0.0",
+  "author": "Adremix AI Content Director",
+  "description": "قالب الـ Prompt الثابت والمتغيرات الديناميكية لتوليد سيناريوهات ريلز وتيك توك إعلانية عالية التفاعل مع واصفات بصرية دقيقة وبرومبتات توليد الصور لكل مشهد.",
+  
+  "dynamicVariables": {
+    "productName": {
+      "type": "string",
+      "description": "اسم المنتج التجاري بوضوح (مثال: موزع عطور اللهب البركاني)"
+    },
+    "productDescription": {
+      "type": "string",
+      "description": "وصف المنتج، مميزاته، الفوائد التي يقدمها، والمشاكل التي يعالجها"
+    },
+    "targetAudience": {
+      "type": "string",
+      "description": "الفئة المستهدفة واهتماماتهم ورغباتهم الشرائية وموقعهم الجغرافي"
+    },
+    "toneOfVoice": {
+      "type": "string",
+      "description": "نبرة الصوت المعتمدة في النصوص الإعلانية (مثال: حماسية، هادئة، فكاهية، ASMR)"
+    },
+    "targetPlatform": {
+      "type": "string",
+      "description": "المنصة الإعلانية التي سيتم نشر الفيديوهات عليها (مثال: TikTok, Instagram Reels, YouTube Shorts)"
+    },
+    "targetDurationSeconds": {
+      "type": "integer",
+      "default": 30,
+      "description": "المدة الزمنية المستهدفة للسيناريو الإجمالي بالثواني"
+    }
+  },
+
+  "systemPromptTemplate": "أنت مخرج محتوى إبداعي محترف ومختص في كتابة سيناريوهات الفيديوهات القصيرة (Reels, TikToks, Shorts) عالية التأثير وجذب الانتباه لمنصات التجارة الإلكترونية والدروبشيبينغ (E-commerce & Dropshipping) ومختص في منصة Adremix AI.\n\nمهمتك هي صياغة سيناريو فيديو ترويجي متكامل ومحكم ثانية بثانية لمنتج معين بناء على المدة المستهدفة والمنصة والجمهور.\n\nاستخدم البيانات التالية لتخصيص محتواك:\n- اسم المنتج: {{productName}}\n- وصف المنتج: {{productDescription}}\n- الجمهور المستهدف: {{targetAudience}}\n- نبرة الصوت: {{toneOfVoice}}\n- المنصة الإعلانية المستهدفة: {{targetPlatform}}\n- المدة الكلية المستهدفة: {{targetDurationSeconds}} ثانية\n\nقواعد إعداد السيناريو:\n1. الخطاف (The Hook): يجب أن يكون في أول 3 ثوانٍ من المشهد الأول لجذب الانتباه ومنع التمرير (No-Scroll Hook).\n2. المشاهد المتتابعة: قسم السيناريو إلى مشاهد مرقمة متناسقة، مجموع مددها يساوي تقريباً المدة المطلوبة ({{targetDurationSeconds}} ثانية).\n3. الوصف البصري (Visual Directions): اشرح اللقطات بدقة (لقطة قريبة، UGC، زاوية الكاميرا، الحركة).\n4. النص الصوتي (Voiceover/Audio Script): حدد الكلمات المنطوقة بدقة مع مراعاة نبرة الصوت ({{toneOfVoice}}).\n5. نصوص توضيحية على الشاشة (On-Screen Text): العبارات القصيرة الجذابة المكتوبة بخط واضح فوق الفيديو.\n6. برومبت الصورة (Image Generation Prompt): لكل مشهد، اكتب وصفاً مفصلاً باللغة الإنجليزية لتوليد صورة ثابتة توضيحية مطابقة للمشهد باستخدام محركات الذكاء الاصطناعي (مثل Midjourney أو DALL-E) دون نصوص بداخلها.\n7. الموسيقى والهاشتاغات: ضع اقتراحات ذكية للموسيقى الخلفية والهاشتاغات الرائجة لضمان الانتشار.\n\nيجب أن تخرج النتيجة كـ JSON صالح ومطابق تماماً للهيكل المحدد أدناه، ولا تكتب أي نصوص تمهيدية أو استنتاجات خارج الـ JSON.",
+
+  "expectedOutputJsonSchema": {
+    "type": "object",
+    "properties": {
+      "campaignTitle": { "type": "string" },
+      "targetPlatform": { "type": "string" },
+      "totalDurationSeconds": { "type": "integer" },
+      "musicAndSoundDesign": {
+        "type": "object",
+        "properties": {
+          "musicVibe": { "type": "string", "description": "نمط الموسيقى المقترحة أو الرائجة المتطابقة مع الجو العام" },
+          "soundEffects": { "type": "array", "items": { "type": "string" }, "description": "المؤثرات الصوتية المقترحة للمشاهد (مثل: ASMR, Woosh, Pop)" }
+        },
+        "required": ["musicVibe"]
+      },
+      "trendingHashtags": {
+        "type": "array",
+        "items": { "type": "string" },
+        "description": "قائمة الهاشتاغات الرائجة والمناسبة للمنتج والمنصة"
+      },
+      "scenes": {
+        "type": "array",
+        "description": "المشاهد المرقمة للسيناريو بالتفصيل الدقيق ثانية بثانية",
+        "items": {
+          "type": "object",
+          "required": [
+            "sceneNumber",
+            "durationSeconds",
+            "visualDescription",
+            "voiceoverArabic",
+            "onScreenTextArabic",
+            "aiImagePromptEnglish"
+          ],
+          "properties": {
+            "sceneNumber": { "type": "integer", "description": "رقم المشهد التسلسلي" },
+            "durationSeconds": { "type": "integer", "description": "مدة المشهد بالثواني" },
+            "visualDescription": { "type": "string", "description": "الوصف البصري وحركة الكاميرا والتفاعل في المشهد بالتفصيل" },
+            "voiceoverArabic": { "type": "string", "description": "النص العربي المنطوق بصوت الراوي أو المؤثر" },
+            "onScreenTextArabic": { "type": "string", "description": "النص البصري القصير المكتوب على الفيديو" },
+            "aiImagePromptEnglish": { "type": "string", "description": "A highly detailed English prompt to generate a beautiful, photorealistic, cinematic reference image representing this scene." }
+          }
+        }
+      }
+    },
+    "required": ["campaignTitle", "targetPlatform", "totalDurationSeconds", "musicAndSoundDesign", "trendingHashtags", "scenes"]
+  },
+
+  "realWorldExample": {
+    "inputs": {
+      "productName": "موزع عطور اللهب البركاني المتطور (Volcanic Flame Diffuser)",
+      "productDescription": "موزع عطور ومرطب هواء فريد يدمج بين تقنية الأمواج فوق الصوتية والـ LED ليعطي شكلاً يحاكي لهب البركان أو حممه الهادئة. يساعد على الاسترخاء، تشغيل صامت أقل من 30 ديسيبل، حماية إيقاف تلقائي عند نفاد الماء.",
+      "targetAudience": "الشباب وأصحاب المنازل الجدد، محبي الديكورات الجذابة وتأثير الـ ASMR، والباحثين عن الاسترخاء وتحسين النوم في دول الخليج.",
+      "toneOfVoice": "حماسية وجذابة في البداية، ثم دافئة وهادئة تحاكي الـ ASMR ومريحة للأعصاب",
+      "targetPlatform": "TikTok / Instagram Reels",
+      "targetDurationSeconds": 15
+    },
+    "generatedOutput": {
+      "campaignTitle": "بركان الاسترخاء المنزلي - موزع عطور اللهب البركاني",
+      "targetPlatform": "TikTok / Instagram Reels",
+      "totalDurationSeconds": 15,
+      "musicAndSoundDesign": {
+        "musicVibe": "موسيقى Lo-Fi خفيفة وهادئة مع همسات ريكورد ASMR طبيعية مريحة للأعصاب",
+        "soundEffects": [
+          "صوت كليك ناعم لتشغيل الجهاز (Mechanical Click)",
+          "صوت نفثة ضباب هادئة جداً (Mist puff ASMR sound)",
+          "صوت خرير ماء ناعم وخفي (Water dripping sound)"
+        ]
+      },
+      "trendingHashtags": [
+        "#VolcanoDiffuser",
+        "#TikTokMadeMeBuyIt",
+        "#أجهزة_منزلية",
+        "#CozyVibes",
+        "#ASMR",
+        "#ديكورات_حديثة"
+      ],
+      "scenes": [
+        {
+          "sceneNumber": 1,
+          "durationSeconds": 3,
+          "visualDescription": "لقطة قريبة جداً (Extreme Close-up) لإصبع يضغط بخفة على زر موزع العطور في غرفة خافتة الإضاءة. تندفع في نفس اللحظة حلقات ضباب بركانية مذهلة للأعلى تضيئها أنوار LED دافئة بلون الحمم البركانية المتوهجة.",
+          "voiceoverArabic": "هذا الاختراع جالس يغير مفهوم الهدوء تماماً! 🌋✨",
+          "onScreenTextArabic": "أفضل قرار أخذته لغرفتي! 😍👇",
+          "aiImagePromptEnglish": "A hyperrealistic extreme close-up of a finger pressing a stylish sleek volcano-shaped oil diffuser button in a dim cozy bedroom. Instantly, magical volcano mist rings erupt upwards with glowing orange lava LED lights, 8k resolution, cinematic lighting, cozy dark room atmosphere, photorealistic."
+        },
+        {
+          "sceneNumber": 2,
+          "durationSeconds": 4,
+          "visualDescription": "لقطة من الأعلى ليد تقوم بتقطير بضع قطرات من زيت عطري ذهبي في خزان مائي شفاف، ثم لقطة سريعة ليد تقترب وتلمس اللهب البصري البارد المتصاعد لإثبات أنه آمن وبارد تماماً.",
+          "voiceoverArabic": "بضع قطرات من زيتك المفضل تعطر كامل المكان بضباب بارد وآمن 100% على أطفالك وأليفك.",
+          "onScreenTextArabic": "علاج عطري دافئ وآمن للمس! 🧘‍♀️🛡️",
+          "aiImagePromptEnglish": "A top-down view of a hand adding pure essential golden oil drops into the water tank of a volcanic diffuser, then shifting to a hand safely touching the orange flame mist. Photorealistic, soft volumetric warm lighting, cozy background, shallow depth of field."
+        },
+        {
+          "sceneNumber": 3,
+          "durationSeconds": 4,
+          "visualDescription": "لقطة جمالية مريحة (Cinematic aesthetic shot) لغرفة نوم مرتبة، يظهر فيها موزع عطور اللهب البركاني على الطاولة بجانب كتب ونبتة خضراء صغيرة، يملأ الغرفة بضياء دافئ هادئ يبعث على الراحة والسكينة.",
+          "voiceoverArabic": "وداعاً للتوتر وصعوبة النوم، واستمتع بجو نوم عميق، هادئ ومريح للأعصاب مع تشغيل صامت كلياً.",
+          "onScreenTextArabic": "نوم عميق وخالٍ من التوتر 😴💤",
+          "aiImagePromptEnglish": "A cozy, modern minimal bedroom corner at night, a volcanic flame diffuser gently running on a bedside wooden table next to neat books and a small green succulent plant, casting a warm orange amber glow onto the surrounding bed, highly detailed, photorealistic, slow relaxed atmosphere."
+        },
+        {
+          "sceneNumber": 4,
+          "durationSeconds": 4,
+          "visualDescription": "يتحول المشهد إلى عرض خصم جذاب يكتب بخط جميل مع سهم يشير لزر الطلب بأسفل الشاشة، والمنتج في الخلفية يواصل تشغيل حلقاته البركانية الساحرة.",
+          "voiceoverArabic": "احصل عليه اليوم بخصم 40% وشحن مجاني وسريع والدفع عند الاستلام. الرابط في البايو أو بالأسفل!",
+          "onScreenTextArabic": "خصم 40% + شحن مجاني وسريع! 🛒🔥",
+          "aiImagePromptEnglish": "An elegant commercial e-commerce advertising screen with a dark, clean background, a volcanic diffuser with glowing red flame mist on the side, bold modern minimal typography in the center reading 'Limited Time Offer 40% OFF', professional retail branding shot, 8k resolution."
+        }
+      ]
+    }
+  }
+}

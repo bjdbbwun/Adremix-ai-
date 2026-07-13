@@ -20,29 +20,30 @@ function startPythonBackend() {
   const apiPath = path.join(process.cwd(), "adremix-engine", "main_api.py");
   const logStream = fs.createWriteStream(path.join(process.cwd(), "python.log"), { flags: "a" });
   
-  const pyProcess = spawn("python3", ["-u", apiPath], {
-    env,
-    stdio: "pipe"
-  });
-  
-  pyProcess.stdout.pipe(logStream);
-  pyProcess.stderr.pipe(logStream);
-  
-  pyProcess.on("error", (err) => {
-    console.error("Failed to start Python backend via python3:", err);
-    logStream.write(`Failed to start Python backend via python3: ${err.message}\n`);
-    const fallbackProcess = spawn("python", ["-u", apiPath], {
+  const startProcess = (command: string, args: string[]) => {
+    const pyProcess = spawn(command, args, {
       env,
       stdio: "pipe"
     });
-    fallbackProcess.stdout.pipe(logStream);
-    fallbackProcess.stderr.pipe(logStream);
     
-    fallbackProcess.on("error", (fallbackErr) => {
-      console.error("Failed to start Python backend via python:", fallbackErr);
-      logStream.write(`Failed to start Python backend via python: ${fallbackErr.message}\n`);
+    pyProcess.stdout.pipe(logStream);
+    pyProcess.stderr.pipe(logStream);
+    
+    pyProcess.on("error", (err) => {
+      console.error(`Failed to start Python backend via ${command}:`, err);
+      logStream.write(`Failed to start Python backend via ${command}: ${err.message}\n`);
+      
+      // Try fallback if python3 fails
+      if (command === "python3") {
+        console.log("Attempting fallback to 'python' command...");
+        startProcess("python", ["-u", apiPath]);
+      }
     });
-  });
+    
+    return pyProcess;
+  };
+  
+  startProcess("python3", ["-u", apiPath]);
 }
 
 async function startServer() {
@@ -147,7 +148,7 @@ Configure specific, platform-native optimizations:
 - Facebook: Visual problem-solution overlay, clear social proof tags, explicit pain points, longer detailed direct captions.
 - YouTube: Structured 15s/30s story beats. Strong pattern interrupt hook, visual product demo body, clear audio CTA and end-screen text.
 
-Deliver the result strictly adhering to the JSON schema specified, with 'isABTest' set to true, and an extensive comparison highlighting the critical differences in hook strategy and script flow between Variation A and Variation B, along with a clear winning hypothesis.`;
+Deliver the result strictly adhering to the JSON schema specified, with 'isABTest' set to true, and an extensive comparison highlighting the critical differences in hook strategy and script flow between the two variations. Ensure the comparison provides actionable insights for performance prediction.`;
 
         responseSchema = {
           type: Type.OBJECT,
@@ -306,7 +307,7 @@ Configure specific, platform-native optimizations:
 - Facebook: Visual problem-solution overlay, clear social proof tags, explicit pain points, longer detailed direct captions.
 - YouTube: Structured 15s/30s story beats. Strong pattern interrupt hook, visual product demo body, clear audio CTA and end-screen text.
 
-Deliver the result strictly adhering to the JSON schema specified. Each platform must have unique hooks, a tailored multi-scene video script, social caption copy, and specific targeting recommendations.`;
+Deliver the result strictly adhering to the JSON schema specified. Each platform must have unique hooks, a tailored multi-scene video script, social caption copy, and specific targeting recommendations tailored to maximize conversion potential.`;
 
         responseSchema = {
           type: Type.OBJECT,
